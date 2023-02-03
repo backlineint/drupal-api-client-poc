@@ -2,11 +2,16 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import { setupCounter } from './counter'
 
-import apiClient from './apiClient';
+import jsonApiClient from './JsonApiClient';
 
-const client = new apiClient('https://dev-decoupled-drupal-qa.pantheonsite.io/');
+const client = new jsonApiClient('https://dev-ds-demo.pantheonsite.io');
+const client2 = new jsonApiClient('https://dev-ds-demo.pantheonsite.io', {apiPrefix: '/jsonapi2'});
 
-console.log(client);
+console.log(client, client2);
+
+await client.getResource().then((data) => {
+  console.log(data);
+});
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
