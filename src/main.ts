@@ -16,11 +16,11 @@ const client2 = new jsonApiClient('https://dev-ds-demo.pantheonsite.io', {apiPre
 
 console.log(client, client2);
 
-await client.getResource().then((data) => {
+await client.getCollection().then((data) => {
   console.log(data);
 });
 
-await client2.getResource().then((data) => {
+await client2.getCollection().then((data) => {
   console.log(data);
 });
 
