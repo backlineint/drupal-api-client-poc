@@ -4,12 +4,23 @@ import { setupCounter } from './counter'
 
 import jsonApiClient from './JsonApiClient';
 
+const customFetch = (input: RequestInfo, init?: RequestInit) => {
+  console.log('using custom fetch');
+  return fetch(input, init).then((response) => {
+    return response;
+  });
+}
+
 const client = new jsonApiClient('https://dev-ds-demo.pantheonsite.io');
-const client2 = new jsonApiClient('https://dev-ds-demo.pantheonsite.io', {apiPrefix: '/jsonapi2'});
+const client2 = new jsonApiClient('https://dev-ds-demo.pantheonsite.io', {apiPrefix: '/jsonapi', customFetch});
 
 console.log(client, client2);
 
 await client.getResource().then((data) => {
+  console.log(data);
+});
+
+await client2.getResource().then((data) => {
   console.log(data);
 });
 
