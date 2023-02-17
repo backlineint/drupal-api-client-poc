@@ -1,6 +1,6 @@
 import { BaseUrl, ApiClientOptions } from './types';
 
-export default class apiClient {
+export default class ApiClient {
   baseUrl: BaseUrl;
   apiPrefix: ApiClientOptions['apiPrefix'];
   customFetch: ApiClientOptions['customFetch'];

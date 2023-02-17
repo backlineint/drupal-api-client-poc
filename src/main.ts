@@ -1,8 +1,6 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
 
-import jsonApiClient from './JsonApiClient';
+import JsonApiClient from './JsonApiClient';
 
 const customFetch = (input: RequestInfo, init?: RequestInit) => {
   console.log('Using custom fetch');
@@ -11,28 +9,28 @@ const customFetch = (input: RequestInfo, init?: RequestInit) => {
   });
 }
 
-const client = new jsonApiClient('https://dev-ds-demo.pantheonsite.io', {apiPrefix: '/jsonapi', customFetch});
+const client = new JsonApiClient('https://dev-ds-demo.pantheonsite.io', {customFetch});
 
-await client.getCollection('node--recipe').then((data) => {
-  console.log(data);
-});
+const collection = await client.getCollection('node--recipe').then((data) => data);
+
+console.log('JSON:API Collection', collection);
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+    <h1>Drupal API Client POC</h1>
+    <h3>Base class <code>apiClient</code> is extended by:</h3>
+    <div class="cols">
+      <div>
+        <h2><code>JsonApiClient</code></h2>
+        <code>
+          const client = new JsonApiClient('https://dev-ds-demo.pantheonsite.io');</br>
+          const collection = await client.getCollection('node--recipe').then((data) => data);
+        </code>
+        <pre>${JSON.stringify(collection, null, 2)}</pre>
+      </div>
+      <div>
+        <h2><code>GraphQlClient</code></h2>
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
   </div>
 `
-
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
