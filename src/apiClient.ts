@@ -7,9 +7,8 @@ export default class ApiClient {
 
   constructor(baseUrl: BaseUrl, options?: ApiClientOptions) {
     const { apiPrefix, customFetch } = options || {};
-
     this.baseUrl = baseUrl;
-    this.apiPrefix = apiPrefix || '/jsonapi';
+    this.apiPrefix = apiPrefix;
     this.customFetch = customFetch;
   }
 
